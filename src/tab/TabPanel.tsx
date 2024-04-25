@@ -25,17 +25,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Ads, subCampaign } from "../App";
-
-// interface Ads {
-//   name: string;
-//   quantity: number;
-// }
-
-// interface subCampaign {
-//   ads: Ads[];
-//   name: string;
-//   status: boolean;
-// }
+import "./tabPanel.css";
 
 const TabPanel = ({
   isSubmit,
@@ -156,54 +146,7 @@ const TabPanel = ({
       <Box sx={{ m: 3, p: 2 }}>
         {/* <Card sx={{ m: 3, p: 2 }}> */}
         <Grid container spacing={2}>
-          {listSubCampaigns?.map((item, index) => (
-            <Grid key={index}>
-              <Card
-                key={index}
-                onClick={() => setSelectedIndex(index)}
-                variant="outlined"
-                sx={{
-                  m: 2,
-                  p: 2,
-                  border: index === selectedIndex ? 2 : "",
-                  borderColor: index === selectedIndex ? "primary.main" : "",
-                }}
-              >
-                <h4
-                  style={
-                    item?.ads.reduce(
-                      (partialSum: number, a: any) => partialSum + a?.quantity,
-                      0
-                    ) <= 0 && isSubmit
-                      ? { color: "red" }
-                      : {}
-                  }
-                >
-                  {item?.name}{" "}
-                  {item?.status ? (
-                    <CheckCircleIcon
-                      fontSize="small"
-                      sx={{ position: "relative", bottom: -4 }}
-                      color="success"
-                    />
-                  ) : (
-                    <CheckCircleOutlineIcon
-                      fontSize="small"
-                      sx={{ position: "relative", bottom: -4 }}
-                      color="disabled"
-                    />
-                  )}
-                </h4>
-                <h4>
-                  {item?.ads.reduce(
-                    (partialSum: number, a: any) => partialSum + a?.quantity,
-                    0
-                  )}
-                </h4>
-              </Card>
-            </Grid>
-          ))}
-          <Grid alignContent={"center"}>
+          <Grid item xs={1} alignContent={"center"}>
             <IconButton
               sx={{ m: 2, p: 2 }}
               color="secondary"
@@ -227,6 +170,58 @@ const TabPanel = ({
             >
               <Icon>add_circle</Icon>
             </IconButton>
+          </Grid>
+          <Grid item xs={11}>
+            <Stack direction="row" spacing={2} p={2} sx={{ overflowX: "auto" }}>
+              {listSubCampaigns?.map((item, index) => (
+                <Card
+                  key={index}
+                  onClick={() => setSelectedIndex(index)}
+                  variant="outlined"
+                  sx={{
+                    minWidth: "200px",
+                    m: 2,
+                    p: 2,
+                    border: 2,
+                    borderColor:
+                      index === selectedIndex ? "secondary.main" : "grey.500",
+                  }}
+                >
+                  <h4
+                    style={
+                      item?.ads.reduce(
+                        (partialSum: number, a: any) =>
+                          partialSum + a?.quantity,
+                        0
+                      ) <= 0 && isSubmit
+                        ? { color: "red" }
+                        : {}
+                    }
+                  >
+                    {item?.name}{" "}
+                    {item?.status ? (
+                      <CheckCircleIcon
+                        fontSize="small"
+                        sx={{ position: "relative", bottom: -4 }}
+                        color="success"
+                      />
+                    ) : (
+                      <CheckCircleOutlineIcon
+                        fontSize="small"
+                        sx={{ position: "relative", bottom: -4 }}
+                        color="disabled"
+                      />
+                    )}
+                  </h4>
+                  <h4>
+                    {item?.ads.reduce(
+                      (partialSum: number, a: any) => partialSum + a?.quantity,
+                      0
+                    )}
+                  </h4>
+                </Card>
+              ))}
+            </Stack>
           </Grid>
         </Grid>
         <Grid container spacing={2} marginTop={2}>
@@ -346,7 +341,11 @@ const TabPanel = ({
                       value={row.quantity}
                       variant="standard"
                       onChange={(e) =>
-                        handleUpdateAds(e.target.value, idx, "quantity")
+                        handleUpdateAds(
+                          Number(e.target.value) >= 0 ? e.target.value : "0",
+                          idx,
+                          "quantity"
+                        )
                       }
                       // value={listSubCampaigns[selectedIndex].name}
                       // onChange={(e) => handleUpdate(selectedIndex, e.target.value)}
