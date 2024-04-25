@@ -83,15 +83,7 @@ function App() {
         });
       });
     }
-
-    // console.log(campaign?.ads?.filter((item) => item?.name !== ""), "check1");
-    // console.log(check, "check");
     setIsError(campaign?.name?.trim() == "" || check);
-    // if () {
-    //   setIsError(false);
-    // } else {
-    //   setIsError(true);
-    // }
     setIsSubmit(true);
     setOpenDialog(true);
   };

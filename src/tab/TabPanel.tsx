@@ -327,9 +327,6 @@ const TabPanel = ({
                       onChange={(e) =>
                         handleUpdateAds(e.target.value, idx, "name")
                       }
-
-                      // value={listSubCampaigns[selectedIndex].name}
-                      // onChange={(e) => handleUpdate(selectedIndex, e.target.value)}
                     />
                   </TableCell>
                   <TableCell align="right">
@@ -348,8 +345,6 @@ const TabPanel = ({
                           "quantity"
                         )
                       }
-                      // value={listSubCampaigns[selectedIndex].name}
-                      // onChange={(e) => handleUpdate(selectedIndex, e.target.value)}
                     />
                   </TableCell>
                   <TableCell align="right">
