@@ -323,6 +323,7 @@ const TabPanel = ({
                       // label="Tên chiến dịch con *"
                       value={row.name}
                       variant="standard"
+                      error={isSubmit && row.name.trim() == ""}
                       onChange={(e) =>
                         handleUpdateAds(e.target.value, idx, "name")
                       }

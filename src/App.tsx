@@ -72,6 +72,19 @@ function App() {
         return;
       }
     });
+
+    if (!check) {
+      listSubCampaigns.map((campaign) => {
+        campaign?.ads?.map((item) => {
+          if (item?.name.trim() == "") {
+            check = true;
+            return;
+          }
+        });
+      });
+    }
+
+    // console.log(campaign?.ads?.filter((item) => item?.name !== ""), "check1");
     // console.log(check, "check");
     setIsError(campaign?.name?.trim() == "" || check);
     // if () {
